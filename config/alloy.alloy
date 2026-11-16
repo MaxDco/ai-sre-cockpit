@@ -1,0 +1,13 @@
+loki.source.journal "system" {
+  max_age = "12h"
+  labels = {
+    job = "systemd-journal",
+    host = "laptop-local",
+  }
+  forward_to = [loki.write.local.receiver]
+}
+loki.write "local" {
+  endpoint {
+    url = "http://loki:3100/loki/api/v1/push"
+  }
+}
